@@ -26,6 +26,7 @@ export class FormComponent implements OnInit, OnDestroy {
     this.formSubscription.add(
       this.selectedTodo.subscribe(todo => {
         if (todo) {
+          console.log('todo', todo)
           this.todoForm.patchValue({
             id: todo.id,
             userId: todo.userId,
@@ -48,20 +49,23 @@ export class FormComponent implements OnInit, OnDestroy {
 }
 
   onSubmit() {
-    if(this.editTodo) {
-      this.formSubscription.add(
-        this.store.dispatch(new UpdateTodo(this.todoForm.value.id, this.todoForm.value))
-        .subscribe(() => {
-          this.clearForm();
-        })
-      )
-    } else {
-      this.formSubscription.add(
-        this.formSubscription = this.store.dispatch(new AddTodo(this.todoForm.value))
-        .subscribe(() => {
-          this.clearForm();
-        })
-      )
+    if(this.todoForm.value.id !== null) {
+      console.log('form', this.todoForm.value)
+      if(this.editTodo) {
+        this.formSubscription.add(
+          this.store.dispatch(new UpdateTodo(this.todoForm.value.id, this.todoForm.value))
+          .subscribe(() => {
+            this.clearForm();
+          })
+        )
+      } else {
+        this.formSubscription.add(
+          this.formSubscription = this.store.dispatch(new AddTodo(this.todoForm.value))
+          .subscribe(() => {
+            this.clearForm();
+          })
+        )
+      }
     }
   }
 
