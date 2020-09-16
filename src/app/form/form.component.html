@@ -31,7 +31,7 @@
                 <button class="btn btn-primary mr-1"
                         type="submit"
                         [disabled]="todoForm.pristine || todoForm.invalid">Submit</button>
-                <button class="btn btn-primary">Clear Form</button>
+                <button class="btn btn-primary" (click)="clearForm()">Clear Form</button>
             </div>
         </form>
     </div>
