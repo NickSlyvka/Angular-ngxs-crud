@@ -50,7 +50,6 @@ export class FormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if(this.todoForm.value.id !== null) {
-      console.log('form', this.todoForm.value)
       if(this.editTodo) {
         this.formSubscription.add(
           this.store.dispatch(new UpdateTodo(this.todoForm.value.id, this.todoForm.value))
